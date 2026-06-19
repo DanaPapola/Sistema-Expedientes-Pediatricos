@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prototipo Sistema Pediátrico UAA</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <section class="login-screen" id="loginScreen">
+      <div class="login-card">
+        <img class="login-logo" src="logo.png" alt="Universidad Autonoma de Aguascalientes">
+        <div>
+          <p class="eyebrow">Sistema pediátrico comunitario</p>
+          <h1>Inicio de sesión</h1>
+          <p class="login-copy">Ingresa con tus credenciales institucionales para acceder al prototipo.</p>
+          <p class="login-help">Demo: alumno/alumno o profesor/profesor.</p>
+        </div>
+        <form class="login-form" id="loginForm">
+          <label class="field">
+            <span>Usuario</span>
+            <input id="loginUser" autocomplete="username" placeholder="alumno">
+          </label>
+          <label class="field">
+            <span>Contraseña</span>
+            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="alumno">
+          </label>
+          <p class="login-error" id="loginError">Usuario o contraseña incorrectos.</p>
+          <button class="primary-button" type="submit">Entrar</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="app-shell is-hidden" id="appShell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img class="uaa-logo" src="logo.png" alt="Universidad Autonoma de Aguascalientes">
+        </div>
+
+        <nav class="nav-list" aria-label="Paginas del prototipo">
+          <button class="nav-item active" data-page="inicio" data-roles="alumno profesor admin">Inicio</button>
+          <button class="nav-item" data-page="captura" data-roles="alumno admin">Captura de paciente</button>
+          <button class="nav-item" data-page="consulta" data-roles="alumno profesor admin">Consulta de expedientes</button>
+          <button class="nav-item" data-page="validacion">Validación</button>
+          <button class="nav-item" data-page="reportes" data-roles="profesor admin">Reportes</button>
+          <button class="nav-item" data-page="usuarios" data-roles="admin">Usuarios y roles</button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Cascaron navegable</strong>
+            <small>HTML, CSS y JavaScript plano</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Sistema pediátrico comunitario</p>
+            <h1 id="pageTitle">Inicio</h1>
+          </div>
+          <div class="profile-pill">
+            <span>Perfil demo</span>
+            <strong id="profileRole">Alumno</strong>
+            <button class="logout-button" id="logoutButton" type="button">Salir</button>
+          </div>
+        </header>
+
+        <section class="page active" id="inicio">
+          <div class="hero-band">
+            <div>
+              <p class="eyebrow">Prácticas de enfermería</p>
+              <h2>Expediente digital para visitas domiciliarias</h2>
+              <p>Vista inicial para presentar el flujo general al cliente: captura, folio, consentimiento, consulta, validación y reportes.</p>
+            </div>
+            <button class="primary-button" data-go="captura" data-roles="alumno admin">Iniciar captura</button>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <span>Expedientes</span>
+              <strong>128</strong>
+              <small>registrados en practicas</small>
+            </article>
+            <article class="metric-card red">
+              <span>Riesgo alto</span>
+              <strong>12</strong>
+              <small>requieren seguimiento</small>
+            </article>
+            <article class="metric-card gold">
+              <span>Pendientes</span>
+              <strong>18</strong>
+              <small>por validar</small>
+            </article>
+            <article class="metric-card slate">
+              <span>Sin conexion</span>
+              <strong>5</strong>
+              <small>en cola local</small>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Flujo principal</h2>
+              </div>
+              <div class="steps">
+                <article><span>1</span><strong>Registrar paciente</strong><small>Datos generales y clinicos.</small></article>
+                <article><span>2</span><strong>Consentimiento</strong><small>Tutor, fecha y aceptacion.</small></article>
+                <article><span>3</span><strong>Semaforo</strong><small>Resultado visible en expediente.</small></article>
+                <article><span>4</span><strong>Validar y reportar</strong><small>Revision docente y exportacion.</small></article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page" id="captura">
+          <div class="page-grid">
+            <section class="panel wide consent-step" id="consentStep">
+              <div class="panel-heading">
+                <h2>Consentimiento informado del tutor</h2>
+                <span class="chip red">Paso obligatorio</span>
+              </div>
+              <p class="helper-text">
+                Antes de iniciar la entrevista, el padre, madre o tutor debe autorizar la valoración y el registro académico de la información.
+              </p>
+              <div class="form-grid">
+                <label class="field"><span>Nombre del tutor</span><input placeholder="Nombre completo"></label>
+                <label class="field">
+                  <span>Parentesco</span>
+                  <select>
+                    <option>Madre</option>
+                    <option>Padre</option>
+                    <option>Tutor</option>
+                  </select>
+                </label>
+                <label class="field"><span>Fecha</span><input type="date"></label>
+              </div>
+              <label class="consent-copy">
+                <input type="checkbox" id="consentCheck">
+                <span>
+                  Declaro que he sido informado de manera clara sobre el objetivo de esta valoración pediátrica comunitaria. Soy consciente de que la información será usada con fines académicos y de seguimiento por la Universidad Autónoma de Aguascalientes, y autorizo que el equipo de enfermería realice preguntas y registre datos del menor bajo criterios de confidencialidad.
+                </span>
+              </label>
+              <label class="signature-box" aria-label="Area de firma digital">
+                <input id="signatureFile" type="file" accept="image/*">
+                <span id="signatureFileName">Adjuntar imagen de firma digital del tutor</span>
+              </label>
+              <button class="primary-button" id="saveConsent" type="button">Guardar consentimiento</button>
+            </section>
+
+            <section class="panel wide capture-after-consent questionnaire-panel">
+              <div class="panel-heading">
+                <h2 id="questionnaireTitle">Guía pediátrica</h2>
+                <span class="chip" id="captureStatus">Bloqueado</span>
+              </div>
+              <p class="helper-text" id="questionnaireHint">Contesta una seccion y presiona Seguir para continuar.</p>
+              <div class="step-progress">
+                <div class="step-progress-bar" id="questionnaireProgress"></div>
+              </div>
+              <div id="questionnaireFields" class="questionnaire-fields"></div>
+              <div class="questionnaire-actions">
+                <button class="secondary-button" id="prevQuestionStep" type="button">Anterior</button>
+                <button class="primary-button" id="nextQuestionStep" type="button">Seguir</button>
+              </div>
+            </section>
+
+            <aside class="panel side-panel capture-after-consent">
+              <h2>Avance de captura</h2>
+              <div class="risk-preview">
+                <span class="risk-badge medium" id="stepCounter">1 de 16</span>
+                <strong id="currentSectionName">Datos descriptivos</strong>
+                <small>La guia se muestra por secciones para evitar saturar la pantalla.</small>
+              </div>
+              <button class="secondary-button" id="backToConsent" type="button">Volver al consentimiento</button>
+              <button class="primary-button" data-toast>Guardar borrador</button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" id="consulta">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Consulta de expedientes</h2>
+              <span class="chip">Busqueda por folio</span>
+            </div>
+            <div class="filters">
+              <label class="field"><span>Folio o nombre</span><input placeholder="EP-2026-0001"></label>
+              <label class="field"><span>Nivel de riesgo</span><select><option>Todos</option></select></label>
+              <label class="field"><span>Zona</span><input placeholder="Comunidad"></label>
+            </div>
+          </section>
+          <div class="records-grid">
+            <article class="record-card"><strong>EP-2026-0001</strong><span>Valeria Lopez</span><small>Riesgo alto · Pendiente</small></article>
+            <article class="record-card"><strong>EP-2026-0002</strong><span>Mateo Hernandez</span><small>Riesgo bajo · Validado</small></article>
+            <article class="record-card"><strong>EP-2026-0003</strong><span>Sofia Ramirez</span><small>Riesgo medio · Pendiente</small></article>
+          </div>
+        </section>
+
+        <section class="page" id="validacion">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Revision del supervisor</h2>
+              <span class="chip red">Pendientes</span>
+            </div>
+            <div class="review-list">
+              <article><strong>EP-2026-0001</strong><span>Completar recomendacion nutricional.</span><button data-toast>Validar</button></article>
+              <article><strong>EP-2026-0003</strong><span>Confirmar datos del entorno familiar.</span><button data-toast>Validar</button></article>
+            </div>
+          </section>
+        </section>
+
+        <section class="page" id="reportes">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Reportes validados</h2>
+              <button class="primary-button" data-toast>Exportar Excel</button>
+            </div>
+            <p class="helper-text">Vista del profesor con expedientes ya validados y el alumno responsable de la captura.</p>
+            <div class="filters">
+              <label class="field"><span>Periodo</span><select><option>Todo el periodo</option></select></label>
+              <label class="field"><span>Alumno</span><input placeholder="Nombre"></label>
+              <label class="field"><span>Riesgo</span><select><option>Todos</option></select></label>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Folio</th><th>Paciente</th><th>Zona</th><th>Alumno</th><th>Riesgo</th><th>Estado</th><th>Validado por</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>EP-2026-0002</td><td>Mateo Hernandez</td><td>Jesus Maria</td><td>Analy Sanchez</td><td>Bajo</td><td>Validado</td><td>Profesor</td></tr>
+                  <tr><td>EP-2026-0004</td><td>Emiliano Torres</td><td>VNSA</td><td>Dana Diaz</td><td>Medio</td><td>Validado</td><td>Profesor</td></tr>
+                  <tr><td>EP-2026-0005</td><td>Camila Perez</td><td>Pocitos</td><td>Karla Llamas</td><td>Alto</td><td>Validado</td><td>Profesor</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="page" id="usuarios">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Roles del sistema</h2>
+              <span class="chip">Acceso institucional</span>
+            </div>
+            <div class="role-grid">
+              <article><strong>Alumno</strong><span>Captura información del paciente.</span></article>
+              <article><strong>Supervisor</strong><span>Valida la información registrada.</span></article>
+              <article><strong>Profesor</strong><span>Consulta reportes consolidados.</span></article>
+              <article><strong>Administrador</strong><span>Gestiona usuarios y permisos.</span></article>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast">Accion simulada en el cascaron.</div>
+    <script src="app.js"></script>
+  </body>
+</html>
